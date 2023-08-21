@@ -74,9 +74,12 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
             throw new NotImplementedException();
         }
 
-        public Task EditSupermarket(SupermarketDto supermarket)
+        public async Task EditSupermarket(Guid supermarketId, string Name)
         {
-            throw new NotImplementedException();
+            var entity = await _supermarketRepository.GetSupermarketBy(supermarketId);
+            //if (entity == null)
+            entity.SetName(Name);
+            await _supermarketRepository.UpdateSupermarket(entity);
         }
 
         public Task EditAddressFromSupermarket(Guid supermarketId)

@@ -25,9 +25,10 @@ public class SupermarketRepository : ISupermarketRepository
         await _supermarketDbContext.SaveChangesAsync();
     }
 
-    public Task UpdateSupermarket(SupermarketAggregate supermarket)
+    public async Task UpdateSupermarket(SupermarketAggregate supermarket)
     {
-        throw new NotImplementedException();
+        _supermarketDbContext.Supermarkets.Update(supermarket);
+        await _supermarketDbContext.SaveChangesAsync();
     }
 
     public async Task DeleteSupermarket(Guid id)
@@ -52,6 +53,7 @@ public class SupermarketRepository : ISupermarketRepository
     {
         throw new NotImplementedException();
     }
+
 
     public Task DeleteAddress(Guid addressId)
     {
