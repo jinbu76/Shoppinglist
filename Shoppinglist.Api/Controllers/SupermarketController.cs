@@ -20,4 +20,10 @@ public class SupermarketController: ControllerBase
     {
         return await _supermarketService.InsertSupermarket(supermarket);
     }
+
+    [HttpDelete]
+    public async Task DeleteSupermarket(Guid supermarketId)
+    {
+        await _supermarketService.DeleteSupermarket(supermarketId);
+    }
 }

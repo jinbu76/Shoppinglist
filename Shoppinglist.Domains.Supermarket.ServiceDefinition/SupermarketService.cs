@@ -65,9 +65,9 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
             throw new NotImplementedException();
         }
 
-        public Task DeleteSupermarket(Guid supermarketId)
+        public async Task DeleteSupermarket(Guid supermarketId)
         {
-            throw new NotImplementedException();
+            await _supermarketRepository.DeleteSupermarket(supermarketId);
         }
 
         public Task DeleteAddress(Guid addressId)

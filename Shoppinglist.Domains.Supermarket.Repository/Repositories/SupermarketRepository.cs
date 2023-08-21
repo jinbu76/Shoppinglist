@@ -24,9 +24,10 @@ public class SupermarketRepository : ISupermarketRepository
         throw new NotImplementedException();
     }
 
-    public Task DeleteSupermarket(Guid id)
+    public async Task DeleteSupermarket(Guid id)
     {
-        throw new NotImplementedException();
+        _supermarketDbContext.Supermarkets.Remove(_supermarketDbContext.Supermarkets.Single(sm => sm.Id == id));
+        await _supermarketDbContext.SaveChangesAsync();
     }
 
     public Task<List<SupermarketAggregate>> GetAllSupermarket()
