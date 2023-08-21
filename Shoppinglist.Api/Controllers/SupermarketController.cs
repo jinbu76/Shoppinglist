@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+    [HttpGet]
+using Microsoft.AspNetCore.Mvc;
 using Shoppinglist.Domains.Supermarket.ServiceDefinition;
 using Shoppinglist.Domains.Supermarket.ServiceDefinition.Models;
 

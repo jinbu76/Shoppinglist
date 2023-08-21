@@ -1,4 +1,4 @@
-﻿using Shoppinglist.Domains.Supermarket.Domain;
+using Shoppinglist.Domains.Supermarket.Domain;
 using Shoppinglist.Domains.Supermarket.Domain.Aggregate;
 using Shoppinglist.Domains.Supermarket.ServiceDefinition.Models;
 
