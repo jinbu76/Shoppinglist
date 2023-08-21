@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shoppinglist.Api", "Shoppinglist.Api\Shoppinglist.Api.csproj", "{FB88980C-016B-4A6F-B80B-190948AD44D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shoppinglist.Api", "Shoppinglist.Api\Shoppinglist.Api.csproj", "{FB88980C-016B-4A6F-B80B-190948AD44D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{2C2EB92C-6908-4BC1-8ADC-B54833F4DCF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Supermarket", "Supermarket", "{3F41C602-F868-4138-815C-9814BE03EBBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.ServiceDefinition", "Shoppinglist.Domains.Supermarket.ServiceDefinition\Supermarket.ServiceDefinition.csproj", "{D24E20B8-AE6E-433C-AD59-93640105CB2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Domain", "Shoppinglist.Domains.Supermarket.Domain\Supermarket.Domain.csproj", "{929ADD7A-77B5-442E-B0C5-869E1384B9D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Repository", "Shoppinglist.Domains.Supermarket.Repository\Supermarket.Repository.csproj", "{040F3414-5422-4E08-A758-1B7EE3B21E6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,27 @@ Global
 		{FB88980C-016B-4A6F-B80B-190948AD44D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB88980C-016B-4A6F-B80B-190948AD44D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB88980C-016B-4A6F-B80B-190948AD44D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D24E20B8-AE6E-433C-AD59-93640105CB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D24E20B8-AE6E-433C-AD59-93640105CB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D24E20B8-AE6E-433C-AD59-93640105CB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D24E20B8-AE6E-433C-AD59-93640105CB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{929ADD7A-77B5-442E-B0C5-869E1384B9D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{929ADD7A-77B5-442E-B0C5-869E1384B9D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{929ADD7A-77B5-442E-B0C5-869E1384B9D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{929ADD7A-77B5-442E-B0C5-869E1384B9D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{040F3414-5422-4E08-A758-1B7EE3B21E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040F3414-5422-4E08-A758-1B7EE3B21E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040F3414-5422-4E08-A758-1B7EE3B21E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040F3414-5422-4E08-A758-1B7EE3B21E6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F41C602-F868-4138-815C-9814BE03EBBE} = {2C2EB92C-6908-4BC1-8ADC-B54833F4DCF6}
+		{D24E20B8-AE6E-433C-AD59-93640105CB2C} = {3F41C602-F868-4138-815C-9814BE03EBBE}
+		{929ADD7A-77B5-442E-B0C5-869E1384B9D7} = {3F41C602-F868-4138-815C-9814BE03EBBE}
+		{040F3414-5422-4E08-A758-1B7EE3B21E6D} = {3F41C602-F868-4138-815C-9814BE03EBBE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {302290C9-FA1F-4A6D-BE26-94A0C7053047}
