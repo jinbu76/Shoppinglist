@@ -59,9 +59,21 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
             return supermarketDto;
         }
 
-        public Task<List<SupermarketDto>> GetAllSupermarket()
+        public async Task<List<SupermarketDto>> GetAllSupermarket()
         {
-            throw new NotImplementedException();
+            var supermarkets = await _supermarketRepository.GetAllSupermarket();
+
+            var addressDtos = new List<AddressDto>();
+            var supermarketDtos = new List<SupermarketDto>();
+            foreach (var supermarket in supermarkets)
+            {
+                addressDtos = supermarket.Addresses.Select(address => new AddressDto(address.Id, address.Street, address.City, address.PostalCode, address.SupermarketId)).ToList();
+
+                var supermarketDto = new SupermarketDto(supermarket.Id, supermarket.Name, addressDtos);
+                supermarketDtos.Add(supermarketDto);
+            }
+
+            return supermarketDtos;
         }
 
         public Task<SupermarketDto> GetSupermarketById(Guid supermarketId)

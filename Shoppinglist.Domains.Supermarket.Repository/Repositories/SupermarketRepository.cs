@@ -1,4 +1,5 @@
-﻿using Shoppinglist.Domains.Supermarket.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using Shoppinglist.Domains.Supermarket.Domain;
 using Shoppinglist.Domains.Supermarket.Domain.Aggregate;
 
 namespace Shoppinglist.Domains.Supermarket.Repository.Repositories;
@@ -37,10 +38,13 @@ public class SupermarketRepository : ISupermarketRepository
         await _supermarketDbContext.SaveChangesAsync();
     }
 
-    public Task<List<SupermarketAggregate>> GetAllSupermarket()
+    public async Task<List<SupermarketAggregate>> GetAllSupermarket()
     {
-        throw new NotImplementedException();
+        var supermarketList = await _supermarketDbContext.Supermarkets.ToListAsync();
+        var addressList = await _supermarketDbContext.Addresses.ToListAsync();
+        return supermarketList;
     }
+    
 
     public async Task<SupermarketAggregate> GetSupermarketBy(Guid id) => _supermarketDbContext.Supermarkets.Single(sm => sm.Id == id);
 
