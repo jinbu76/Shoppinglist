@@ -5,7 +5,7 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
     public interface ISupermarketService
     {
         Task<SupermarketDto> InsertSupermarket(CreateSupermarketDto supermarket);
-        Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, AddressDto address);
+        Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address);
         Task<List<SupermarketDto>> GetAllSupermarket();
         Task<SupermarketDto> GetSupermarketById(Guid supermarketId);
         Task<SupermarketDto> GetSupermarketByAddressId(Guid id);

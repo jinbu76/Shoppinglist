@@ -35,17 +35,8 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
 
         }
 
-        public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, AddressDto address)
+        public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address)
         {
-            //var addressId = Guid.NewGuid();
-            //var addressAggregate = new AddressAggregate(addressId, address.Street, address.City,
-            //    address.PostalCode, supermarket.Id!.Value);
-
-            //await _supermarketRepository.AddAddressToSupermarket(addressAggregate);
-            //supermarket.Addresses.Add(new AddressDto(addressId, address.Street, address.City, address.PostalCode,
-            //    supermarket.Id.Value));
-            //return supermarket;
-
             var supermarket = await _supermarketRepository.GetSupermarketBy(supermarketId);
 
             var addressId = Guid.NewGuid();
@@ -62,7 +53,7 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
                 addressDtos.Add(addressDto);
             }
             
-            addressDtos.Add(new AddressDto(addressId, address.Street,address.City, address.PostalCode, address.SupermarketId));
+            addressDtos.Add(new AddressDto(addressId, address.Street,address.City, address.PostalCode, supermarketId));
 
             var supermarketDto = new SupermarketDto(supermarket.Id, supermarket.Name, addressDtos);
             return supermarketDto;

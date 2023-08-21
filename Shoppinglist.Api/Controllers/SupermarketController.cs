@@ -28,7 +28,7 @@ public class SupermarketController: ControllerBase
     }
     
     [HttpPut("{supermarketId}")]
-    public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, AddressDto address)
+    public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address)
     {
         return await _supermarketService.AddAddressToSupermarket(supermarketId, address);
     }
