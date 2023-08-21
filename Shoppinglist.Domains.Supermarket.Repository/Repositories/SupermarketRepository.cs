@@ -48,14 +48,17 @@ public class SupermarketRepository : ISupermarketRepository
 
     public async Task<SupermarketAggregate> GetSupermarketBy(Guid id) => _supermarketDbContext.Supermarkets.Single(sm => sm.Id == id);
 
+    public async Task<AddressAggregate> GetAddressBy(Guid id) => _supermarketDbContext.Addresses.Single(sm => sm.Id == id);
+
     public Task<SupermarketAggregate> GetSupermarketByAddress(Guid id)
     {
         throw new NotImplementedException();
     }
 
-    public Task EditAddressFromSupermarket(Guid supermarketId)
+    public async Task UpdateAddress(AddressAggregate address)
     {
-        throw new NotImplementedException();
+       _supermarketDbContext.Addresses.Update(address);
+       await _supermarketDbContext.SaveChangesAsync();
     }
 
 

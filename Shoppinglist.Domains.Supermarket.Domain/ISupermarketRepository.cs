@@ -10,8 +10,9 @@ namespace Shoppinglist.Domains.Supermarket.Domain
         Task DeleteSupermarket(Guid id);
         Task<List<SupermarketAggregate>> GetAllSupermarket();
         Task<SupermarketAggregate> GetSupermarketBy(Guid id);
+        Task<AddressAggregate> GetAddressBy(Guid id);
         Task<SupermarketAggregate> GetSupermarketByAddress(Guid id);
-        Task EditAddressFromSupermarket(Guid supermarketId);
+        Task UpdateAddress(AddressAggregate address);
         Task DeleteAddress(Guid addressId);
     }
 }

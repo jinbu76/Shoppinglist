@@ -10,7 +10,7 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
         Task<SupermarketDto> GetSupermarketById(Guid supermarketId);
         Task<SupermarketDto> GetSupermarketByAddressId(Guid id);
         Task EditSupermarket(Guid supermarketId, string Name);
-        Task EditAddressFromSupermarket(Guid supermarketId);
+        Task EditAddress(AddressDto address);
         Task DeleteSupermarket(Guid supermarketId);
         Task DeleteAddress(Guid addressId);
     }

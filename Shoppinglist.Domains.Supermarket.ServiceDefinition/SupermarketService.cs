@@ -94,9 +94,13 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
             await _supermarketRepository.UpdateSupermarket(entity);
         }
 
-        public Task EditAddressFromSupermarket(Guid supermarketId)
+        public async Task EditAddress(AddressDto address)
         {
-            throw new NotImplementedException();
+            var addressEntity = await _supermarketRepository.GetAddressBy(address.Id!.Value);
+            addressEntity.SetCity(address.City);
+            addressEntity.SetPostalCode(address.PostalCode);
+            addressEntity.SetStreet(address.Street);
+            await _supermarketRepository.UpdateAddress(addressEntity);
         }
 
         public async Task DeleteSupermarket(Guid supermarketId)

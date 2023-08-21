@@ -28,9 +28,9 @@ public class SupermarketController: ControllerBase
     }
 
     [HttpPut("/supermarket/{supermarketId}")]
-    public async Task EditSupermarket(Guid supermarketId, string Name)
+    public async Task EditSupermarket(Guid supermarketId, string name)
     {
-        await _supermarketService.EditSupermarket(supermarketId, Name);
+        await _supermarketService.EditSupermarket(supermarketId, name);
     }
 
     [HttpDelete]
@@ -45,5 +45,11 @@ public class SupermarketController: ControllerBase
         return await _supermarketService.AddAddressToSupermarket(supermarketId, address);
     }
 
-    
+    [HttpPut("/address/{addressId}")]
+    public async Task EditAddress(Guid addressId, AddressDto address)
+    {
+        if (address.Id != addressId) throw new BadHttpRequestException("Wrong adress ids");
+
+        await _supermarketService.EditAddress(address);
+    }
 }
