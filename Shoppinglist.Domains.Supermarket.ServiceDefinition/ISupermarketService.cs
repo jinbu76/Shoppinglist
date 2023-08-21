@@ -7,9 +7,7 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
         Task<SupermarketDto> InsertSupermarket(CreateSupermarketDto supermarket);
         Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address);
         Task<List<SupermarketDto>> GetAllSupermarket();
-        Task<SupermarketDto> GetSupermarketById(Guid supermarketId);
-        Task<SupermarketDto> GetSupermarketByAddressId(Guid id);
-        Task EditSupermarket(Guid supermarketId, string Name);
+        Task EditSupermarket(Guid supermarketId, string name);
         Task EditAddress(AddressDto address);
         Task DeleteSupermarket(Guid supermarketId);
         Task DeleteAddress(Guid addressId);

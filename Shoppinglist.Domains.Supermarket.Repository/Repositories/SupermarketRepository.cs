@@ -62,8 +62,10 @@ public class SupermarketRepository : ISupermarketRepository
     }
 
 
-    public Task DeleteAddress(Guid addressId)
+    public async Task DeleteAddress(Guid addressId)
     {
-        throw new NotImplementedException();
+        _supermarketDbContext.Addresses.Remove(
+            _supermarketDbContext.Addresses.Single(address => address.Id == addressId));
+        await _supermarketDbContext.SaveChangesAsync();
     }
 }

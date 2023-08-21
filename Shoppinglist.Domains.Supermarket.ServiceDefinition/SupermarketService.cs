@@ -76,21 +76,12 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
             return supermarketDtos;
         }
 
-        public Task<SupermarketDto> GetSupermarketById(Guid supermarketId)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<SupermarketDto> GetSupermarketByAddressId(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task EditSupermarket(Guid supermarketId, string Name)
+        public async Task EditSupermarket(Guid supermarketId, string name)
         {
             var entity = await _supermarketRepository.GetSupermarketBy(supermarketId);
             //if (entity == null)
-            entity.SetName(Name);
+            entity.SetName(name);
             await _supermarketRepository.UpdateSupermarket(entity);
         }
 
@@ -108,9 +99,9 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
             await _supermarketRepository.DeleteSupermarket(supermarketId);
         }
 
-        public Task DeleteAddress(Guid addressId)
+        public async Task DeleteAddress(Guid addressId)
         {
-            throw new NotImplementedException();
+            await _supermarketRepository.DeleteAddress(addressId);
         }
     }
 }

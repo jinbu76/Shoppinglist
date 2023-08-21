@@ -33,7 +33,7 @@ public class SupermarketController: ControllerBase
         await _supermarketService.EditSupermarket(supermarketId, name);
     }
 
-    [HttpDelete]
+    [HttpDelete("supermarket/{supermarketId}")]
     public async Task DeleteSupermarket(Guid supermarketId)
     {
         await _supermarketService.DeleteSupermarket(supermarketId);
@@ -51,5 +51,11 @@ public class SupermarketController: ControllerBase
         if (address.Id != addressId) throw new BadHttpRequestException("Wrong adress ids");
 
         await _supermarketService.EditAddress(address);
+    }
+
+    [HttpDelete("address/{addressId}")]
+    public async Task DeleteAddress(Guid addressId)
+    {
+        await _supermarketService.DeleteAddress(addressId);
     }
 }
