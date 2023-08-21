@@ -26,4 +26,10 @@ public class SupermarketController: ControllerBase
     {
         await _supermarketService.DeleteSupermarket(supermarketId);
     }
+    
+    [HttpPut("{supermarketId}")]
+    public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, AddressDto address)
+    {
+        return await _supermarketService.AddAddressToSupermarket(supermarketId, address);
+    }
 }

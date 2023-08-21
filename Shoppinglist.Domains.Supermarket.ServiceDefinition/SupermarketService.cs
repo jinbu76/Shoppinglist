@@ -27,7 +27,7 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
 
             List<AddressDto> addressDtos = new()
             {
-                new AddressDto(addressEntity.Id, addressEntity.Street, addressEntity.City, addressEntity.PostalCode)
+                new AddressDto(addressEntity.Id, addressEntity.Street, addressEntity.City, addressEntity.PostalCode, supermarketId)
             };
 
             return new SupermarketDto(supermarketEntity.Id, supermarketEntity.Name, addressDtos);
@@ -35,9 +35,37 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
 
         }
 
-        public Task<SupermarketDto> AddAddressToSupermarket(SupermarketDto supermarket, AddressDto address)
+        public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, AddressDto address)
         {
-            throw new NotImplementedException();
+            //var addressId = Guid.NewGuid();
+            //var addressAggregate = new AddressAggregate(addressId, address.Street, address.City,
+            //    address.PostalCode, supermarket.Id!.Value);
+
+            //await _supermarketRepository.AddAddressToSupermarket(addressAggregate);
+            //supermarket.Addresses.Add(new AddressDto(addressId, address.Street, address.City, address.PostalCode,
+            //    supermarket.Id.Value));
+            //return supermarket;
+
+            var supermarket = await _supermarketRepository.GetSupermarketBy(supermarketId);
+
+            var addressId = Guid.NewGuid();
+            var addressAggregate = new AddressAggregate(addressId, address.Street, address.City,
+                address.PostalCode, supermarket.Id);
+
+            await _supermarketRepository.AddAddressToSupermarket(addressAggregate);
+
+            List<AddressDto> addressDtos = new();
+            foreach (var supermarketAddress in supermarket.Addresses)
+            {
+                var addressDto = new AddressDto(supermarketAddress.Id, supermarketAddress.Street,
+                    supermarketAddress.City, supermarketAddress.PostalCode, supermarketAddress.SupermarketId);
+                addressDtos.Add(addressDto);
+            }
+            
+            addressDtos.Add(new AddressDto(addressId, address.Street,address.City, address.PostalCode, address.SupermarketId));
+
+            var supermarketDto = new SupermarketDto(supermarket.Id, supermarket.Name, addressDtos);
+            return supermarketDto;
         }
 
         public Task<List<SupermarketDto>> GetAllSupermarket()

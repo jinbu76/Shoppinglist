@@ -19,6 +19,12 @@ public class SupermarketRepository : ISupermarketRepository
         return result;
     }
 
+    public async Task AddAddressToSupermarket(AddressAggregate address)
+    {
+        _supermarketDbContext.Addresses.Add(address);
+        await _supermarketDbContext.SaveChangesAsync();
+    }
+
     public Task UpdateSupermarket(SupermarketAggregate supermarket)
     {
         throw new NotImplementedException();
@@ -35,10 +41,7 @@ public class SupermarketRepository : ISupermarketRepository
         throw new NotImplementedException();
     }
 
-    public Task<SupermarketAggregate> GetSupermarketBy(Guid id)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<SupermarketAggregate> GetSupermarketBy(Guid id) => _supermarketDbContext.Supermarkets.Single(sm => sm.Id == id);
 
     public Task<SupermarketAggregate> GetSupermarketByAddress(Guid id)
     {
