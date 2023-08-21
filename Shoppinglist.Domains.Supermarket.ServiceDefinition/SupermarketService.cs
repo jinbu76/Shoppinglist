@@ -1,4 +1,4 @@
-﻿using Shoppinglist.Domains.Supermarket.Domain;
+using Shoppinglist.Domains.Supermarket.Domain;
 using Shoppinglist.Domains.Supermarket.Domain.Aggregate;
 using Shoppinglist.Domains.Supermarket.ServiceDefinition.Models;
 
@@ -63,11 +63,10 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
         {
             var supermarkets = await _supermarketRepository.GetAllSupermarket();
 
-            var addressDtos = new List<AddressDto>();
             var supermarketDtos = new List<SupermarketDto>();
             foreach (var supermarket in supermarkets)
             {
-                addressDtos = supermarket.Addresses.Select(address => new AddressDto(address.Id, address.Street, address.City, address.PostalCode, address.SupermarketId)).ToList();
+                var addressDtos = supermarket.Addresses.Select(address => new AddressDto(address.Id, address.Street, address.City, address.PostalCode, address.SupermarketId)).ToList();
 
                 var supermarketDto = new SupermarketDto(supermarket.Id, supermarket.Name, addressDtos);
                 supermarketDtos.Add(supermarketDto);
@@ -80,7 +79,9 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
         public async Task EditSupermarket(Guid supermarketId, string name)
         {
             var entity = await _supermarketRepository.GetSupermarketBy(supermarketId);
-            //if (entity == null)
+            if (entity == null)
+                throw new HttpRequestException($"Supermarket with the {supermarketId} was not found.");
+
             entity.SetName(name);
             await _supermarketRepository.UpdateSupermarket(entity);
         }
