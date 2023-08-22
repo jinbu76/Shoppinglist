@@ -6,7 +6,7 @@ namespace Shoppinglist.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class SupermarketController: ControllerBase
+public class SupermarketController : ControllerBase
 {
     private readonly ISupermarketService _supermarketService;
 
@@ -21,7 +21,7 @@ public class SupermarketController: ControllerBase
         return await _supermarketService.InsertSupermarket(supermarket);
     }
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<List<SupermarketDto>> GetAllSuperMarket()
     {
         return await _supermarketService.GetAllSupermarket();
@@ -38,9 +38,9 @@ public class SupermarketController: ControllerBase
     {
         await _supermarketService.DeleteSupermarket(supermarketId);
     }
-    
+
     [HttpPost("address/{supermarketId}")]
-    public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address)
+    public async Task<AddressDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address)
     {
         return await _supermarketService.AddAddressToSupermarket(supermarketId, address);
     }

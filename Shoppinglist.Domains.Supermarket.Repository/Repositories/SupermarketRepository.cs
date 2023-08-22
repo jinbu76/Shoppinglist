@@ -20,6 +20,7 @@ public class SupermarketRepository : ISupermarketRepository
         return result;
     }
 
+
     public async Task AddAddressToSupermarket(AddressAggregate address)
     {
         _supermarketDbContext.Addresses.Add(address);
@@ -44,21 +45,22 @@ public class SupermarketRepository : ISupermarketRepository
         var addressList = await _supermarketDbContext.Addresses.ToListAsync();
         return supermarketList;
     }
-    
 
-    public async Task<SupermarketAggregate> GetSupermarketBy(Guid id) => _supermarketDbContext.Supermarkets.Single(sm => sm.Id == id);
 
-    public async Task<AddressAggregate> GetAddressBy(Guid id) => _supermarketDbContext.Addresses.Single(sm => sm.Id == id);
+    public async Task<SupermarketAggregate> GetSupermarketBy(Guid id) =>
+        await Task.Run(() => _supermarketDbContext.Supermarkets.Single(sm => sm.Id == id));
 
-    public Task<SupermarketAggregate> GetSupermarketByAddress(Guid id)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<AddressAggregate> GetAddressBy(Guid id) =>
+        await Task.Run(() => _supermarketDbContext.Addresses.Single(sm => sm.Id == id));
+
+    public async Task<List<AddressAggregate>> GetAllAddressForSupermarket(Guid supermarketId) => await Task.Run(() =>
+        _supermarketDbContext.Addresses.Where(sm => sm.SupermarketId == supermarketId).ToList());
+
 
     public async Task UpdateAddress(AddressAggregate address)
     {
-       _supermarketDbContext.Addresses.Update(address);
-       await _supermarketDbContext.SaveChangesAsync();
+        _supermarketDbContext.Addresses.Update(address);
+        await _supermarketDbContext.SaveChangesAsync();
     }
 
 

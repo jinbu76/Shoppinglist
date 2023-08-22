@@ -3,16 +3,15 @@
 public class AddressAggregate
 {
     public Guid Id { get; init; }
-    public string Street { get; private set; }
-    public string City { get; private set; }
-    public string PostalCode { get; private set; }
+    public string Street { get; private set; } = string.Empty;
+    public string City { get; private set; } = string.Empty;
+    public string PostalCode { get; private set; } = string.Empty;
 
     public SupermarketAggregate Supermarket { get; init; }
     public Guid SupermarketId { get; init; }
 
     public AddressAggregate()
     {
-        
     }
 
     public AddressAggregate(Guid id, string street, string city, string postalCode, Guid supermarketId)
@@ -24,8 +23,18 @@ public class AddressAggregate
         SupermarketId = supermarketId;
     }
 
-    public void SetStreet(string street) { Street = street; }
-    public void SetCity(string city) {  City = city; }
-    public void SetPostalCode(string postalCode) {  PostalCode = postalCode; }
+    public void SetStreet(string street)
+    {
+        Street = street;
+    }
 
+    public void SetCity(string city)
+    {
+        City = city;
+    }
+
+    public void SetPostalCode(string postalCode)
+    {
+        PostalCode = postalCode;
+    }
 }
