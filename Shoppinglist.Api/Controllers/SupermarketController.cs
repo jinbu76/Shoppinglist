@@ -1,4 +1,3 @@
-    [HttpGet]
 using Microsoft.AspNetCore.Mvc;
 using Shoppinglist.Domains.Supermarket.ServiceDefinition;
 using Shoppinglist.Domains.Supermarket.ServiceDefinition.Models;
@@ -16,25 +15,25 @@ public class SupermarketController: ControllerBase
         _supermarketService = supermarketService;
     }
 
-    [HttpPost("supermarket")]
+    [HttpPost]
     public async Task<SupermarketDto> CreateSupermarket([FromBody] CreateSupermarketDto supermarket)
     {
         return await _supermarketService.InsertSupermarket(supermarket);
     }
 
-    [HttpGet("supermarket")]
+    [HttpGet()]
     public async Task<List<SupermarketDto>> GetAllSuperMarket()
     {
         return await _supermarketService.GetAllSupermarket();
     }
 
-    [HttpPut("supermarket/{supermarketId}")]
+    [HttpPut("{supermarketId}")]
     public async Task EditSupermarket(Guid supermarketId, string name)
     {
         await _supermarketService.EditSupermarket(supermarketId, name);
     }
 
-    [HttpDelete("supermarket/{supermarketId}")]
+    [HttpDelete("{supermarketId}")]
     public async Task DeleteSupermarket(Guid supermarketId)
     {
         await _supermarketService.DeleteSupermarket(supermarketId);
@@ -49,7 +48,7 @@ public class SupermarketController: ControllerBase
     [HttpPut("address/{addressId}")]
     public async Task EditAddress(Guid addressId, AddressDto address)
     {
-        if (address.Id != addressId) throw new BadHttpRequestException("Wrong adress ids");
+        if (address.Id != addressId) throw new BadHttpRequestException("Wrong address ids");
 
         await _supermarketService.EditAddress(address);
     }
