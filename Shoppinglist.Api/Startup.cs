@@ -86,7 +86,6 @@ public class Startup
     private TypeAdapterConfig ConfigureMapster()
     {
         var mapsterConfig = new TypeAdapterConfig();
-        //mapsterConfig.NewConfig<SupermarketAggregate, SupermarketDto>();
         return mapsterConfig;
     }
 }
