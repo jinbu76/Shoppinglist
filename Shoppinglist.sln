@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{2C2E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Supermarket", "Supermarket", "{3F41C602-F868-4138-815C-9814BE03EBBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.ServiceDefinition", "Shoppinglist.Domains.Supermarket.ServiceDefinition\Supermarket.ServiceDefinition.csproj", "{D24E20B8-AE6E-433C-AD59-93640105CB2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.ServiceDefinition", "Shoppinglist.Domains.Supermarket.ServiceDefinition\Supermarket.ServiceDefinition.csproj", "{D24E20B8-AE6E-433C-AD59-93640105CB2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Domain", "Shoppinglist.Domains.Supermarket.Domain\Supermarket.Domain.csproj", "{929ADD7A-77B5-442E-B0C5-869E1384B9D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Domain", "Shoppinglist.Domains.Supermarket.Domain\Supermarket.Domain.csproj", "{929ADD7A-77B5-442E-B0C5-869E1384B9D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Repository", "Shoppinglist.Domains.Supermarket.Repository\Supermarket.Repository.csproj", "{040F3414-5422-4E08-A758-1B7EE3B21E6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Repository", "Shoppinglist.Domains.Supermarket.Repository\Supermarket.Repository.csproj", "{040F3414-5422-4E08-A758-1B7EE3B21E6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

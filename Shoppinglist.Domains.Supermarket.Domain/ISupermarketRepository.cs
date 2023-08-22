@@ -11,12 +11,8 @@ namespace Shoppinglist.Domains.Supermarket.Domain
         Task<List<SupermarketAggregate>> GetAllSupermarket();
         Task<SupermarketAggregate> GetSupermarketBy(Guid id);
         Task<AddressAggregate> GetAddressBy(Guid id);
-        Task<SupermarketAggregate> GetSupermarketByAddress(Guid id);
+        Task<List<AddressAggregate>> GetAllAddressForSupermarket(Guid supermarktId);
         Task UpdateAddress(AddressAggregate address);
         Task DeleteAddress(Guid addressId);
     }
 }
-
-
-
-

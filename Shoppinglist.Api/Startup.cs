@@ -1,3 +1,5 @@
+using Mapster;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Shoppinglist.Domains.Supermarket.Domain;
@@ -25,6 +27,11 @@ public class Startup
             options.JsonSerializerOptions.PropertyNamingPolicy = null;
             options.JsonSerializerOptions.WriteIndented = true;
         });
+
+        // Mapster
+        services.AddScoped<IMapper, ServiceMapper>();
+        services.AddSingleton(ConfigureMapster());
+
         // JWT
 
         // Swagger
@@ -40,10 +47,8 @@ public class Startup
         //DbContext
         var connectionString = Configuration.GetConnectionString("SqlServer");
         services.AddDbContext<SupermarketDBContext>(option =>
-            option.UseSqlServer(Configuration.GetConnectionString("SqlServer"))
+            option.UseSqlServer(connectionString)
         );
-
-        
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -55,11 +60,11 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        app.UseAuthorization();
+
 
         app.UseCors(cors => { cors.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
         app.UseRouting();
-
+        app.UseAuthorization();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 
@@ -76,5 +81,11 @@ public class Startup
                 Email = "mike@gruender.dev"
             }
         });
+    }
+
+    private TypeAdapterConfig ConfigureMapster()
+    {
+        var mapsterConfig = new TypeAdapterConfig();
+        return mapsterConfig;
     }
 }

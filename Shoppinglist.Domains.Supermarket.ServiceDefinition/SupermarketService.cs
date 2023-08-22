@@ -1,10 +1,13 @@
+using System.Net;
+using Mapster;
+using MapsterMapper;
 using Shoppinglist.Domains.Supermarket.Domain;
 using Shoppinglist.Domains.Supermarket.Domain.Aggregate;
 using Shoppinglist.Domains.Supermarket.ServiceDefinition.Models;
 
 namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
 {
-    public class SupermarketService: ISupermarketService
+    public class SupermarketService : ISupermarketService
     {
         private readonly ISupermarketRepository _supermarketRepository;
 
@@ -25,70 +28,42 @@ namespace Shoppinglist.Domains.Supermarket.ServiceDefinition
 
             await _supermarketRepository.InsertSupermarket(supermarketEntity);
 
-            List<AddressDto> addressDtos = new()
-            {
-                new AddressDto(addressEntity.Id, addressEntity.Street, addressEntity.City, addressEntity.PostalCode, supermarketId)
-            };
-
-            return new SupermarketDto(supermarketEntity.Id, supermarketEntity.Name, addressDtos);
-
-
+            return supermarketEntity.Adapt<SupermarketDto>();
         }
 
-        public async Task<SupermarketDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address)
+        public async Task<AddressDto> AddAddressToSupermarket(Guid supermarketId, CreateAddressDto address)
         {
-            var supermarket = await _supermarketRepository.GetSupermarketBy(supermarketId);
-
-            var addressId = Guid.NewGuid();
-            var addressAggregate = new AddressAggregate(addressId, address.Street, address.City,
-                address.PostalCode, supermarket.Id);
+            var addressAggregate = new AddressAggregate(Guid.NewGuid(), address.Street, address.City,
+                address.PostalCode, supermarketId);
 
             await _supermarketRepository.AddAddressToSupermarket(addressAggregate);
 
-            List<AddressDto> addressDtos = new();
-            foreach (var supermarketAddress in supermarket.Addresses)
-            {
-                var addressDto = new AddressDto(supermarketAddress.Id, supermarketAddress.Street,
-                    supermarketAddress.City, supermarketAddress.PostalCode, supermarketAddress.SupermarketId);
-                addressDtos.Add(addressDto);
-            }
-            
-            addressDtos.Add(new AddressDto(addressId, address.Street,address.City, address.PostalCode, supermarketId));
-
-            var supermarketDto = new SupermarketDto(supermarket.Id, supermarket.Name, addressDtos);
-            return supermarketDto;
+            return addressAggregate.Adapt<AddressDto>();
         }
 
         public async Task<List<SupermarketDto>> GetAllSupermarket()
         {
             var supermarkets = await _supermarketRepository.GetAllSupermarket();
-
-            var supermarketDtos = new List<SupermarketDto>();
-            foreach (var supermarket in supermarkets)
-            {
-                var addressDtos = supermarket.Addresses.Select(address => new AddressDto(address.Id, address.Street, address.City, address.PostalCode, address.SupermarketId)).ToList();
-
-                var supermarketDto = new SupermarketDto(supermarket.Id, supermarket.Name, addressDtos);
-                supermarketDtos.Add(supermarketDto);
-            }
-
-            return supermarketDtos;
+            return supermarkets.Adapt<List<SupermarketDto>>();
         }
 
 
         public async Task EditSupermarket(Guid supermarketId, string name)
         {
-            var entity = await _supermarketRepository.GetSupermarketBy(supermarketId);
-            if (entity == null)
-                throw new HttpRequestException($"Supermarket with the {supermarketId} was not found.");
-
+            var entity = await _supermarketRepository.GetSupermarketBy(supermarketId) ??
+                         throw new HttpRequestException($"Supermarket with the {supermarketId} was not found.", null,
+                             HttpStatusCode.NotFound);
             entity.SetName(name);
             await _supermarketRepository.UpdateSupermarket(entity);
         }
 
         public async Task EditAddress(AddressDto address)
         {
-            var addressEntity = await _supermarketRepository.GetAddressBy(address.Id!.Value);
+            if (!address.Id.HasValue)
+                throw new HttpRequestException($"No address id found.", null, HttpStatusCode.BadRequest);
+            var addressEntity = await _supermarketRepository.GetAddressBy(address.Id.Value) ??
+                                throw new HttpRequestException($"Address with the {address.Id} was not found.", null,
+                                    HttpStatusCode.NotFound);
             addressEntity.SetCity(address.City);
             addressEntity.SetPostalCode(address.PostalCode);
             addressEntity.SetStreet(address.Street);
